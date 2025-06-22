@@ -1,0 +1,168 @@
+/* themes/custom/sogep/css/menu.css */
+
+/* Genel Navbar Stilleri */
+.navbar-main {
+  background-color: #3A404A; /* Sahibinden.com menü rengi */
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Geniş ekranlarda merkezi hizalama */
+  margin: 0 auto;
+  gap: 20px; /* Elemanlar arası boşluk */
+}
+
+/* Logo Bölümü */
+.navbar-logo-link img {
+  height: 40px; /* Logo yüksekliği */
+  width: auto;
+  display: block;
+}
+
+/* Arama Çubuğu ve Detaylı Arama */
+.search-and-details-section {
+  display: flex;
+  flex-grow: 1; /* Ortadaki arama kısmının genişlemesini sağlar */
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar-wrapper {
+  display: flex;
+  background-color: #555c68; /* Arama çubuğu arkaplan rengi */
+  border-radius: 5px;
+  overflow: hidden; /* Kenar yuvarlamaları için */
+  flex-grow: 1;
+  max-width: 500px; /* Arama çubuğunun maksimum genişliği */
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  outline: none;
+  width: 100%;
+}
+
+.search-input::placeholder {
+  color: #bbb;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button .search-icon {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.detailed-search-link {
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap; /* Yeni satıra geçmesini engeller */
+}
+
+.detailed-search-link:hover {
+  text-decoration: underline;
+}
+
+/* Auth Butonları Bölümü (Kayıt Ol, İlanlar Sayfası, İlan Ver) */
+.auth-buttons-section {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Butonlar arası boşluk */
+  white-space: nowrap; /* Butonların yan yana kalmasını sağlar */
+}
+
+.auth-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease-in-out;
+}
+
+.auth-link:hover {
+  color: #f0f0f0;
+  text-decoration: underline;
+}
+
+.separator {
+  color: #777; /* Ayırıcı rengi */
+  font-size: 14px;
+}
+
+.post-ad-button {
+  background-color: #337ab7; /* Sahibinden.com'daki mavi butona benzer renk */
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.post-ad-button:hover {
+  background-color: #286090;
+}
+
+/* Mobil İçin Hamburger Butonu (Varsayılan olarak gizli) */
+.mobile-toggle-button-wrapper {
+  display: none; /* Büyük ekranlarda gizli */
+}
+
+.hamburger-button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive Düzenlemeler (İhtiyaca göre ayarlanır) */
+@media (max-width: 992px) {
+  .search-and-details-section {
+    flex-direction: column; /* Küçük ekranlarda arama çubuğu ve detaylı arama alt alta */
+    align-items: flex-start;
+  }
+  .search-bar-wrapper {
+    width: 100%;
+    max-width: none; /* Küçük ekranlarda tam genişlik */
+  }
+  .auth-buttons-section {
+    flex-direction: column; /* Küçük ekranlarda butonlar alt alta */
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .auth-link-hide-on-lg, .separator {
+    display: none; /* Geniş ekranlarda gizlenen öğeler, mobil görünümde de gizli kalabilir veya farklı bir menü yapısı düşünebilirsiniz */
+  }
+  .mobile-toggle-button-wrapper {
+    display: block; /* Hamburger butonu mobil'de görünür */
+  }
+  .navbar-container {
+    flex-wrap: wrap; /* Öğelerin alt alta geçmesini sağlar */
+  }
+}

@@ -1,0 +1,17 @@
+.arac-detay img{
+    max-width: 100%;
+    height: auto;
+}
+
+.arac-kunye li label {
+    font-weight: bold;
+    min-width: 160px;
+}
+
+.arac-kunye li div {
+    display: inline-block;
+}
+
+.arac-detay .sifir-arac{
+    border: 1px solid red;
+}

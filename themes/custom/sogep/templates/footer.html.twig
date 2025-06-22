@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * Custom footer template for Sogep theme.
+ *
+ * This template renders the footer section based on the provided design.
+ */
+#}
+
+<footer class="main-footer-section">
+  <div class="footer-content-wrapper">
+    <div class="footer-logo-area">
+      {# Tema klasöründeki logo.png dosyasını doğrudan kullan #}
+      <a href="{{ path('<front>') }}" rel="home">
+        <img src="{{ base_path ~ directory }}/logo.png" alt="{{ 'Home'|t }}" class="footer-logo" />
+      </a>
+    </div>
+
+    {# Menü Sütunları - Bu alanları Drupal menülerinden doldurabiliriz #}
+    <div class="footer-nav-columns">
+      {# Hakkında menüsü #}
+      <div class="footer-nav-column">
+        <h4 class="footer-column-title">Hakkında</h4>
+        <ul class="footer-list">
+          <li><a href="#">Nam urna nequ</a></li>
+          <li><a href="#">Nam urna nequ</a></li>
+          <li><a href="#">Nam urna nequ</a></li>
+        </ul>
+      </div>
+
+      {# Fiyatlandırma menüsü #}
+      <div class="footer-nav-column">
+        <h4 class="footer-column-title">Fiyatlandırma</h4>
+        <ul class="footer-list">
+          <li><a href="#">Nam urna nequ</a></li>
+          <li><a href="#">Nam urna nequ</a></li>
+          <li><a href="#">Nam urna nequ</a></li>
+        </ul>
+      </div>
+
+      {# Teknoloji menüsü #}
+      <div class="footer-nav-column">
+        <h4 class="footer-column-title">Teknoloji</h4>
+        <ul class="footer-list">
+          <li><a href="#">Altyapı</a></li>
+          <li><a href="#">Ölçekleme</a></li>
+          <li><a href="#">Kullanıcı Yönetimi</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {# Sosyal Medya ve İletişim #}
+    <div class="footer-social-contact">
+      <div class="social-icons">
+        <a href="#" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a> {# LinkedIn ikonu #}
+        <a href="#" class="social-icon-link"><i class="fab fa-instagram"></i></a> {# Instagram ikonu #}
+        <a href="#" class="social-icon-link"><i class="fab fa-medium-m"></i></a> {# Medium ikonu #}
+      </div>
+      <a href="mailto:info@eduport.io" class="email-button">info@eduport.io</a>
+    </div>
+  </div>
+
+  {# En Alt Telif Hakkı ve Footer Bölgesi #}
+  <div class="footer-bottom-bar">
+    {% if page.footer %}
+      <div class="footer-region-content">{{ page.footer }}</div>
+    {% endif %}
+    <p class="copyright-text"> &copy; {{ "now"|date("Y") }} Tüm Hakları Saklıdır.</p>
+  </div>
+</footer>

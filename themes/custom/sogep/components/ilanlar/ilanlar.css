@@ -1,0 +1,29 @@
+.ilanlar table img {
+    width: 120px;
+    height: auto;
+}
+
+body.page-ilanlar .views-exposed-form {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+body.page-ilanlar .views-exposed-form label {
+    font-weight: bold;
+    font-size: 14px;
+}
+body.page-ilanlar form .form-item {
+    display: block;
+    margin-bottom: 30px;
+}
+
+body.page-ilanlar select.hidden {
+    display: none !important;
+}
+
+body.page-ilanlar .shs-widget-container {
+    width: 100%;
+}
+
+body.page-ilanlar .shs-widget-container .form-select {
+    width: 100%;
+}

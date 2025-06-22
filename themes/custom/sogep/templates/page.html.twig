@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Main page template for the Sogep theme.
+ *
+ * This template handles the overall layout of a page.
+ */
+#}
+
+<div class="main_layout">
+  <div class="container"> {# Ana container burada başlıyor #}
+
+    {# Header Bölümü #}
+    <header class="site-header">
+      <div class="row align-items-center">
+        <div class="col-md-2">{{ page.logo }}</div>
+        <div class="col-md-8 menu-region"> {# Menü bölgesi için #}
+          {{ attach_library('sogep/menu') }} {# Menü CSS'ini yüklemesi için bu satır MUTLAKA OLMALI #}
+          {# Kendi özel menu.html.twig dosyanızı buraya dahil edin #}
+          {% include '@sogep/templates/menu.html.twig' %}
+        </div>
+        <div class="col-md-2 header-actions">
+            {% if page.header_actions %}{{ page.header_actions }}{% endif %}
+        </div>
+      </div>
+    </header>
+
+    {% if not is_front %}
+    <div class="page-title-wrapper">
+      <div class="row">
+        <div class="col-md-12">{{ page.page_title }}</div>
+      </div>
+    </div>
+    {% endif %}
+
+    {# İçerik Alanları #}
+    <div class="row">
+      <div class="col-md-12">{{ page.content_top }}</div>
+    </div>
+
+    <div class="row">
+      {% if page.sidebar %}
+      <div class="col-md-2">{{ page.sidebar }}</div> 
+      <div class="col-md-10">{{ page.content }}</div>
+      {% else %}
+      <div class="col-md-12">{{ page.content }}</div>
+      {% endif %}
+    </div>
+
+    {# Footer Bölümü #}
+    {{ attach_library('sogep/footer') }}
+    {% include '@sogep/templates/footer.html.twig' %}
+
+  </div> </div> ```

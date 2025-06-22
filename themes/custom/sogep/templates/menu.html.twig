@@ -1,0 +1,153 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ * - attributes: HTML attributes for the menu item.
+ * - below: The menu item child items.
+ * - title: The menu link title.
+ * - url: The menu link URL, instance of \Drupal\Core\Url
+ * - localized_options: Menu link localized options.
+ * - is_expanded: TRUE if the link has visible children within the current
+ * menu tree.
+ * - is_collapsed: TRUE if the link has children within the current menu tree
+ * that are not currently visible.
+ * - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{{ attach_library('sogep/menu') }} {# Gerekli JS/CSS kütüphanelerini dahil edin #}
+
+{% import _self as menus %}
+
+{#
+  Sahibinden.com benzeri Navbar ana kapsayıcısı.
+  bg-[#3A404A] rengi Ekran Resmi 2025-06-19 14.40.25.png görselinden alınmıştır.
+#}
+<nav class="navbar-main">
+  <div class="navbar-container">
+    {# Sol Logo Bölümü - Drupal yönetim panelinden yüklenen logo #}
+    <a href="{{ path('<front>') }}" class="navbar-logo-link" rel="home">
+      {% if site_logo %}
+        <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="site-branding__logo" />
+      {% else %}
+        {# Eğer yönetim panelinde logo yoksa, temanın kendi içindeki varsayılan logo.png #}
+        <img src="{{ base_path ~ directory }}/logo.png" alt="{{ 'Home'|t }}" class="site-branding__logo" />
+      {% endif %}
+    </a>
+
+    {# Arama Çubuğu ve Detaylı Arama - Görselin ortasında yer alıyor #}
+    <div class="search-and-details-section">
+      <div class="search-bar-wrapper">
+        <input
+          type="text"
+          placeholder="Kelime, ilan no veya mağaza adı ile ara"
+          class="search-input"
+        />
+        <button class="search-button">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="search-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </button>
+      </div>
+      <a href="#" class="detailed-search-link">Detaylı Arama</a>
+    </div>
+
+    {# Sağ Bölüm: Kayıt Ol, İlanlar Sayfası ve Ücretsiz İlan Ver Butonu #}
+    <div class="auth-buttons-section">
+      {# "Kayıt Ol" Linki #}
+      {% set register_link_url = path('node.add', {'node_type': 'kullanicilar'}) %} {# Kullanıcı oluşturma sayfası #}
+      {% set register_link_title = 'Kayıt Ol' %}
+      
+      {# "İlanlar Sayfası" Linki #}
+      {% set ilanlar_page_url = '/ilanlar' %} {# İlanları listeleyen Views sayfasının URL'si #}
+      {% set ilanlar_page_title = 'İlanlar Sayfası' %}
+
+      {# "Ücretsiz İlan Ver" Butonu URL'si #}
+      {% set post_ad_url = path('node.add', {'node_type': 'ilan'}) %}
+      {% set post_ad_title = 'Ücretsiz İlan Ver' %}
+
+      {# Menü öğelerini kontrol ederek linkleri dinamik hale getirelim #}
+      {% set found_register = false %}
+      {% set found_ilanlar = false %}
+      {% set found_post_ad = false %}
+
+      {% for item in items %}
+        {% if item.title|lower == 'kayıt ol' %}
+          {% set register_link_url = item.url %}
+          {% set found_register = true %}
+        {% elseif item.title|lower == 'ilanlar sayfası' %}
+          {% set ilanlar_page_url = item.url %}
+          {% set found_ilanlar = true %}
+        {% elseif item.title|lower == 'ücretsiz ilan ver' %}
+          {% set post_ad_url = item.url %} {# Eğer menüde linki farklı bir yere gidiyorsa #}
+          {% set found_post_ad = true %}
+        {% endif %}
+      {% endfor %}
+
+      {# Kayıt Ol linki #}
+      <a href="{{ register_link_url }}" class="auth-link auth-link-hide-on-lg">{{ register_link_title }}</a>
+      <span class="separator auth-link-hide-on-lg">|</span>
+      {# İlanlar Sayfası linki #}
+      <a href="{{ ilanlar_page_url }}" class="auth-link auth-link-hide-on-lg">{{ ilanlar_page_title }}</a>
+
+      {# Ücretsiz İlan Ver butonu - Javascript ile yönlendirme #}
+      <button class="post-ad-button js-post-ad-button" data-url="{{ post_ad_url }}">
+        {{ post_ad_title }}
+      </button>
+    </div>
+
+    {# Mobil Menü için Hamburger İkonu #}
+    <div class="mobile-toggle-button-wrapper">
+      <button class="hamburger-button">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hamburger-icon">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+{#
+  Bu makro, eğer ana menü öğeleriniz (Özellikler, Modüller vb.) için de Drupal menü sistemini kullanacaksanız ve bu öğeler navbar'ın içine geliyorsa kullanılabilir.
+  Sahibinden.com'da ana kategoriler ve menü öğeleri genellikle navbar'ın altında ayrı bir bar şeklinde oluyor.
+  Eğer bu makroya ihtiyacınız yoksa, silebilirsiniz. Ancak eğer mobil menü veya başka bir yerde hiyerarşik menülere ihtiyacınız olursa kullanılabilir.
+#}
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      {# Ana menü listesi için sınıflar - eğer bu menü kullanılacaksa #}
+      <ul class="main-menu-list" {{ attributes.addClass('nav', 'flex-column') }}>
+    {% else %}
+      {# Alt menüler için sınıflar #}
+      <ul class="submenu-list nav flex-column level-{{ menu_level }}">
+    {% endif %}
+    {% for item in items %}
+      {% set classes = [
+        'nav-item',
+        item.in_active_trail ? 'active',
+        item.is_expanded ? 'expanded',
+        item.is_collapsed ? 'collapsed'
+      ] %}
+      <li{{ item.attributes.addClass(classes) }}>
+        <a class="nav-link {{ item.in_active_trail ? 'fw-bold text-primary' : '' }}" href="{{ item.url }}">
+          {{ item.title }}
+          {% if item.below %}
+            {# Alt menü açma/kapama ikonu #}
+            <span class="dropdown-toggle float-end"></span>
+          {% endif %}
+        </a>
+        {% if item.below %}
+          {# Alt menüyü tekrar çağır #}
+          <div class="submenu-wrapper">
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

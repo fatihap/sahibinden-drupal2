@@ -1,0 +1,42 @@
+/* themes/custom/sogep/css/style.css (veya uygun gördüğünüz başka bir CSS dosyası) */
+
+.aciklama-wrapper {
+  /* Bu wrapper açıklama divini sarmalayacak */
+  position: relative;
+}
+
+.aciklama-icerik {
+  /* Açıklamanın kendisi */
+  overflow: hidden;
+  transition: max-height 0.5s ease-out; /* Yumuşak geçiş için */
+  /* Maske efekti, daha fazla içerik olduğunu belirtmek için */
+  mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+}
+
+.aciklama-icerik.collapsed {
+  max-height: 150px; /* Varsayılan olarak kısalmış yükseklik */
+}
+
+.aciklama-icerik.expanded {
+  max-height: none; /* Genişletildiğinde tamamını göster */
+  mask-image: none; /* Maskeyi kaldır */
+  -webkit-mask-image: none; /* Maskeyi kaldır */
+}
+
+.aciklama-devamini-gor-wrapper {
+  text-align: center;
+  margin-top: 10px;
+  /* Maskenin üzerini kapatmaması için relative position ve z-index */
+  position: relative;
+  z-index: 2;
+  background-color: #f8f9fa; /* Arka plan rengi açıklama kutusu ile uyumlu olsun */
+  padding: 5px 0;
+  border-top: 1px solid #e9ecef; /* Hafif bir ayırıcı */
+}
+
+.aciklama-devamini-gor-btn {
+  font-weight: bold;
+  font-size: 1rem;
+  /* Daha görünür olması için küçük bir stil */
+}

@@ -1,0 +1,16 @@
+name: SOGEP
+type: theme
+description: 'SOGEP özel tema'
+core_version_requirement: ^11.0
+base theme: stable9
+libraries:
+  - sogep/basic
+
+regions:
+  logo: Logo
+  menu: Menu
+  page_title: 'Page Title'
+  content_top: 'Content Top'
+  sidebar: Sidebar
+  content: Content
+  footer: Footer
