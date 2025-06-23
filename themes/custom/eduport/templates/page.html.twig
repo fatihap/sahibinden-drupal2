@@ -1,0 +1,60 @@
+{# templates/page.html.twig #}
+
+<div class="layout-container">
+
+  <header role="banner">
+    {# Header bileşeni #}
+    {% include directory ~ '/templates/custom/header.html.twig' %}
+  </header>
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+    <div class="layout-content">
+      {# Hero Section #}
+      {% if page.hero_section %}
+        {{ page.hero_section }} {# Bu bir blok olabilir #}
+      {% else %}
+        {% include directory ~ '/templates/custom/hero-section.html.twig' %}
+      {% endif %}
+
+      {# Course Categories #}
+      {% if page.course_categories %}
+        {{ page.course_categories }}
+      {% else %}
+        {% include directory ~ '/templates/custom/course-categories.html.twig' %}
+      {% endif %}
+
+      {# Featured Courses (Genellikle bir Views Block'u olarak eklenir) #}
+      {% if page.featured_courses %}
+        {{ page.featured_courses }}
+      {% endif %}
+
+      {# About Us Section #}
+      {% if page.about_us %}
+        {{ page.about_us }}
+      {% else %}
+        {% include directory ~ '/templates/custom/about-us.html.twig' %}
+      {% endif %}
+
+      {# Instructors Section #}
+      {% if page.instructors %}
+        {{ page.instructors }}
+      {% endif %}
+
+      {# Testimonials Section #}
+      {% if page.testimonials %}
+        {{ page.testimonials }}
+      {% endif %}
+
+      {# Diğer ana içerikler (örneğin node içeriği) #}
+      {{ page.content }}
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    {# Footer bileşeni #}
+    {% include directory ~ '/templates/custom/footer.html.twig' %}
+  </footer>
+
+</div>

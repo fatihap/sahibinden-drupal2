@@ -1,0 +1,201 @@
+{# sogep/templates/page--eduport.html.twig #}
+{# Bu dosya, /eduport URL takma adına sahip sayfalar için özel şablon görevi görür. #}
+
+{# Eduport için özel kütüphaneleri dahil ediyoruz. #}
+{# Bu kütüphaneler sogep/sogep.libraries.yml içinde tanımlanmış olmalıdır. #}
+{{ attach_library('sogep/eduport-styling') }}
+{{ attach_library('sogep/eduport-bootstrap') }}
+
+<div class="eduport-landing-page-wrapper">
+    {# Header Bölümü (Görseldeki Navbar) #}
+    <header class="eduport-header">
+        <nav class="navbar navbar-expand-lg py-3 eduport-navbar">
+            <div class="container-fluid px-5">
+                {# Sol Logo ve Marka Metni #}
+                <a class="navbar-brand d-flex align-items-center" href="{{ path('<front>') }}">
+                    {# Logo görselinin yolunu temanızın 'images' klasörüne göre ayarlayın #}
+                    {# Base path ve directory değişkenleri Drupal tarafından sağlanır. #}
+                    <img src="{{ url('theme', base_path ~ directory ~ '/images/eduport-logo.png') }}" alt="Eduport Logo"
+                        class="eduport-logo me-2">
+                    <span class="eduport-brand-text fw-bold">eduport</span>
+                </a>
+
+                {# Mobil için Navbar Toggler #}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#eduportNavbarContent" aria-controls="eduportNavbarContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {# Navbar İçeriği: Menü, Dil Seçici, Butonlar #}
+                <div class="collapse navbar-collapse" id="eduportNavbarContent">
+                    {# Ortadaki Navigasyon Menüsü #}
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link eduport-nav-link active" aria-current="page" href="#">Özellikler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link eduport-nav-link" href="#">Modüller</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link eduport-nav-link" href="#">Nedir?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link eduport-nav-link" href="#">Blog</a>
+                        </li>
+                    </ul>
+
+                    {# Sağ Taraftaki Dil Seçici ve Butonlar #}
+                    <div class="d-flex align-items-center">
+                        {# Dil Seçici (Basit bir dropdown olarak) #}
+                        <div class="dropdown me-3">
+                            <button class="btn btn-outline-secondary dropdown-toggle eduport-btn-language" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                EN
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">TR</a></li>
+                                <li><a class="dropdown-item" href="#">DE</a></li>
+                            </ul>
+                        </div>
+
+                        {# Teklif Al Butonu #}
+                        <button class="btn btn-outline-primary me-3 eduport-btn-outline">
+                            Teklif Al <i class="bi bi-arrow-up-right"></i>
+                        </button>
+
+                        {# Demo Butonu #}
+                        <button class="btn btn-primary eduport-btn-primary">
+                            Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {# Ana İçerik Bölümü #}
+    <main role="main" class="eduport-main-content">
+        {# Hero Section - DÜZELTİLMİŞ SATIR #}
+        {# Sadece background-image özelliğini inline olarak bırakıyoruz. Diğerlerini CSS dosyasına taşıdık. #}
+
+        <section class="hero-section text-white text-center py-5">;
+            <div class="container">
+                <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">
+                    Eğitimin Geleceği Burada Başlıyor
+                </h1>
+                <p class="lead mb-5 animate__animated animate__fadeInUp animate__delay-1s">
+                    Uzman eğitmenlerden geniş bir konu yelpazesinde bilgi edinin ve kariyerinizi bir üst seviyeye
+                    taşıyın.
+                </p>
+                <a href="/courses" class="btn btn-lg btn-warning animate__animated animate__zoomIn animate__delay-2s">
+                    Şimdi Kursları Keşfet <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        {# Course Categories #}
+        <section class="course-categories py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 fw-bold">Popüler Kurs Kategorileri</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <a href="/category/web-development"
+                            class="card h-100 text-decoration-none text-dark shadow-sm hover-grow">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
+                                <h5 class="card-title fw-bold">Web Geliştirme</h5>
+                                <p class="card-text text-muted">Web siteleri ve uygulamalar oluşturun.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/category/graphic-design"
+                            class="card h-100 text-decoration-none text-dark shadow-sm hover-grow">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-palette display-4 text-success mb-3"></i>
+                                <h5 class="card-title fw-bold">Grafik Tasarım</h5>
+                                <p class="card-text text-muted">Görsel iletişimde uzmanlaşın.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/category/digital-marketing"
+                            class="card h-100 text-decoration-none text-dark shadow-sm hover-grow">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-megaphone display-4 text-danger mb-3"></i>
+                                <h5 class="card-title fw-bold">Dijital Pazarlama</h5>
+                                <p class="card-text text-muted">Markanızı dijital dünyada büyütün.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/category/data-science"
+                            class="card h-100 text-decoration-none text-dark shadow-sm hover-grow">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-bar-chart display-4 text-info mb-3"></i>
+                                <h5 class="card-title fw-bold">Veri Bilimi</h5>
+                                <p class="card-text text-muted">Verileri analiz etme ve yorumlama sanatı.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# Drupal'ın standart sayfa içeriğini buraya yerleştirebiliriz. #}
+        {# Bu, "Eduport" node'unun kendi başlığı ve gövde içeriği olacaktır. #}
+        <section class="container my-5">
+            {{ page.content }}
+        </section>
+
+    </main>
+
+    {# Footer #}
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-warning mb-3">Eduport</h5>
+                    <p class="text-muted">
+                        Eğitimde yeni nesil deneyimler sunarak, herkesin potansiyeline ulaşmasına yardımcı oluyoruz.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-3">Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="/about-us" class="text-muted text-decoration-none">Hakkımızda</a></li>
+                        <li><a href="/courses" class="text-muted text-decoration-none">Tüm Kurslar</a></li>
+                        <li><a href="/instructors" class="text-muted text-decoration-none">Eğitmenler</a></li>
+                        <li><a href="/blog" class="text-muted text-decoration-none">Blog</a></li>
+                        <li><a href="/contact" class="text-muted text-decoration-none">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-3">Bize Ulaşın</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="bi bi-geo-alt me-2"></i> Adres: Örnek Cad. No:123, Şehir, Ülke</li>
+                        <li><i class="bi bi-envelope me-2"></i> Email: info@eduport.com</li>
+                        <li><i class="bi bi-telephone me-2"></i> Telefon: +90 555 123 45 67</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-3">Bültenimize Abone Olun</h5>
+                    <p class="text-muted">En son kurslar ve indirimler hakkında bilgi almak için.</p>
+                    {# Webform modülü ile bir bülten abonelik formu oluşturabilirsiniz #}
+                    {# {{ drupal_form('webform_submission_form', {webform_id: 'newsletter_signup'}) }} #}
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="text-center text-muted">
+                &copy; {{ "now"|date("Y") }} Eduport. Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
+</div>

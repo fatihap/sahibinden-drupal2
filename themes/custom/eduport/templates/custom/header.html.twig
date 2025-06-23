@@ -1,0 +1,59 @@
+{# templates/custom/header.html.twig #}
+<nav class="navbar navbar-expand-lg py-3 eduport-navbar">
+  <div class="container-fluid px-5"> {# Yatayda biraz boşluk bırakmak için px-5 #}
+
+    {# Sol Logo ve Marka Metni #}
+    <a class="navbar-brand d-flex align-items-center" href="{{ path('<front>') }}">
+      <img src="{{ url('theme', theme.path ~ '/images/eduport-logo.png') }}" alt="Eduport Logo" class="eduport-logo me-2"> {# Logo görseli #}
+      <span class="eduport-brand-text fw-bold">eduport</span> {# Marka metni #}
+    </a>
+
+    {# Mobil için Navbar Toggler #}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#eduportNavbarContent" aria-controls="eduportNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {# Navbar İçeriği: Menü, Dil Seçici, Butonlar #}
+    <div class="collapse navbar-collapse" id="eduportNavbarContent">
+      {# Ortadaki Navigasyon Menüsü #}
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> {# mx-auto ile ortalanır #}
+        <li class="nav-item">
+          <a class="nav-link eduport-nav-link active" aria-current="page" href="#">Özellikler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link eduport-nav-link" href="#">Modüller</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link eduport-nav-link" href="#">Nedir?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link eduport-nav-link" href="#">Blog</a>
+        </li>
+      </ul>
+
+      {# Sağ Taraftaki Dil Seçici ve Butonlar #}
+      <div class="d-flex align-items-center">
+        {# Dil Seçici (Basit bir dropdown olarak) #}
+        <div class="dropdown me-3">
+          <button class="btn btn-outline-secondary dropdown-toggle eduport-btn-language" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            EN
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">TR</a></li>
+            <li><a class="dropdown-item" href="#">DE</a></li>
+          </ul>
+        </div>
+
+        {# Teklif Al Butonu #}
+        <button class="btn btn-outline-primary me-3 eduport-btn-outline">
+          Teklif Al <i class="bi bi-arrow-up-right"></i>
+        </button>
+
+        {# Demo Butonu #}
+        <button class="btn btn-primary eduport-btn-primary">
+          Demo
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

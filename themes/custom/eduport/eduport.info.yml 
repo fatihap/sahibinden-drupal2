@@ -1,0 +1,22 @@
+# my_eduport_theme.info.yml
+name: Eduport Theme
+type: theme
+description: Eduport web sitesi için özel Drupal teması.
+core_version_requirement: ^11.0
+base theme: false # Kendi temel temanız yoksa veya base theme kullanmıyorsanız 'false' olarak bırakın.
+                   # Veya 'olivero' ya da 'stark' gibi bir Drupal çekirdek teması kullanabilirsiniz.
+                   # Örn: base theme: classy
+libraries:
+  - eduport/global-styling
+  - eduport/bootstrap # Eğer Bootstrap'i custom/libraries.yml içinde tanımladıysanız.
+
+regions:
+  header: 'Header'
+  hero_section: 'Hero Section'
+  course_categories: 'Course Categories'
+  featured_courses: 'Featured Courses'
+  about_us: 'About Us'
+  instructors: 'Instructors'
+  testimonials: 'Testimonials'
+  content: 'Content'
+  footer: 'Footer'
