@@ -7,56 +7,22 @@
 *
 * Available variables:
 * - node: The node entity with limited access to object properties and methods.
-* Only method names starting with "get", "has", or "is" and a few common
-* methods such as "id", "label", and "bundle" are available. For example:
-* - node.getCreatedTime() will return the node creation timestamp.
-* - node.hasField('field_example') returns TRUE if the node bundle includes
-* field_example. (This does not indicate the presence of a value in this
-* field.)
-* - node.isPublished() will return whether the node is published or not.
-* Calling other methods, such as node.delete(), will result in an exception.
-* See \Drupal\node\Entity\Node for a full list of public properties and
-* methods for the node object.
 * - label: (optional) The title of the node.
-* - content: All node items. Use {{ content }} to print them all,
-* or print a subset such as {{ content.field_example }}. Use
-* {{ content|without('field_example') }} to temporarily suppress the printing
-* of a given child element.
-* - author_picture: The node author user entity, rendered using the "compact"
-* view mode.
+* - content: All node items.
+* - author_picture: The node author user entity, rendered using the "compact" view mode.
 * - date: (optional) Themed creation date field.
 * - author_name: (optional) Themed author name field.
 * - url: Direct URL of the current node.
 * - display_submitted: Whether submission information should be displayed.
 * - attributes: HTML attributes for the containing element.
-* The attributes.class element may contain one or more of the following
-* classes:
-* - node: The current template type (also known as a "theming hook").
-* - node--type-[type]: The current node type. For example, if the node is an
-* "Article" it would result in "node--type-article". Note that the machine
-* name will often be in a short form of the human readable label.
-* - node--view-mode-[view_mode]: The View Mode of the node; for example, a
-* teaser would result in: "node--view-mode-teaser", and
-* full: "node--view-mode-full".
-* The following are controlled through the node publishing options.
-* - node--promoted: Appears on nodes promoted to the front page.
-* - node--sticky: Appears on nodes ordered above other non-sticky nodes in
-* teaser listings.
-* - node--unpublished: Appears on unpublished nodes visible only to site
-* admins.
-* - title_attributes: Same as attributes, except applied to the main title
-* tag that appears in the template.
-* - content_attributes: Same as attributes, except applied to the main
-* content tag that appears in the template.
-* - author_attributes: Same as attributes, except applied to the author of
-* the node tag that appears in the template.
-* - title_prefix: Additional output populated by modules, intended to be
-* displayed in front of the main title tag that appears in the template.
-* - title_suffix: Additional output populated by modules, intended to be
-* displayed after the main title tag that appears in the template.
+* - title_attributes: Same as attributes, except applied to the main title tag.
+* - content_attributes: Same as attributes, except applied to the main content tag.
+* - author_attributes: Same as attributes, except applied to the author of the node tag.
+* - title_prefix: Additional output populated by modules.
+* - title_suffix: Additional output populated by modules.
 * - view_mode: View mode; for example, "teaser" or "full".
-* - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
-* - page: Flag for the full page state. Will be true if view_mode is 'full'.
+* - teaser: Flag for the teaser state.
+* - page: Flag for the full page state.
 *
 * @see template_preprocess_node()
 *
@@ -64,15 +30,21 @@
 #}
 
 <div class="arac-detay container">
-  <div class="ilan-baslik-wrapper">
-    <h1 class="d-flex align-items-center justify-content-between">
-      <span id="ilanBaslik">{{ node.field_ilan_basligi.value|upper }}</span>
-      <button id="favButton" class="btn p-0" aria-label="Favorilere Ekle">
-        <i id="favIcon" class="bi bi-star fs-2 text-warning"></i>
-      </button>
-    </h1>
-  </div>
 
+  {# BAŞLIK HİZALAMASINI DÜZELTMEK İÇİN: BİR ROW VE COL-12 İÇİNE ALINDI #}
+  <div class="row">
+    <div class="col-12">
+      <div class="ilan-baslik-wrapper">
+        <h1 class="d-flex align-items-center justify-content-between">
+          <span id="ilanBaslik">{{ node.field_ilan_baslik.value|upper }}</span>
+          <button id="favButton" class="btn p-0" aria-label="Favorilere Ekle">
+            <i id="favIcon" class="bi bi-star fs-2 text-warning"></i>
+          </button>
+        </h1>
+      </div>
+    </div>
+  </div>
+  {# BAŞLIK HİZALAMASI DÜZELTME SONU #}
 
   <div id="favToast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
     <div class="toast align-items-center text-white bg-success border-0" role="alert">
@@ -83,23 +55,18 @@
     </div>
   </div>
 
-
-  <div class="row">
-
-
-    <div class="col-md-8">
+  <div class="row mt-4"> {# FOTOĞRAF VE İLAN BİLGİLERİ AYNI SATIRDA #}
+    <div class="col-lg-8 col-md-12"> {# Fotoğraf alanı daha geniş, col-lg-8 olarak ayarlandı #}
       <div class="galeri-wrapper">
-
         <div id="carGallery" class="carousel slide">
           <div class="carousel-inner">
             {% for image in node.field_arac_galeri %}
             <div class="carousel-item {% if loop.first %}active{% endif %}">
-              <img src="{{ file_url(image.entity.uri.value) }}" alt="Araç Görseli" data-bs-toggle="modal"
-                data-bs-target="#imageModal" data-image-index="{{ loop.index0 }}">
+              <img src="{{ file_url(image.entity.uri.value) }}" alt="Araç Görseli" class="main-gallery-image"
+                data-bs-toggle="modal" data-bs-target="#imageModal" data-image-index="{{ loop.index0 }}">
             </div>
             {% endfor %}
           </div>
-
           <button class="carousel-control-prev" type="button" data-bs-target="#carGallery" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </button>
@@ -116,64 +83,10 @@
           </div>
           {% endfor %}
         </div>
-
-        {# AÇIKLAMA ALANI - Devamını Gör/Gizle Butonu ile #}
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="p-4 bg-light rounded border">
-              <h5 class="mb-3">İlan Açıklaması</h5>
-              
-              {# Açıklama içeriğini bir wrapper içine alalım #}
-              <div class="aciklama-wrapper">
-                <div class="aciklama-icerik fs-5" id="fullAciklamaContent">
-                  {{ content.field_aciklama }}
-                </div>
-                
-                {# Buton ve butonun görünürlüğünü kontrol eden div #}
-                <div id="aciklamaToggleWrapper" class="aciklama-devamini-gor-wrapper" style="display: none;">
-                  <button class="btn btn-link aciklama-devamini-gor-btn" type="button" id="toggleAciklamaBtn">
-                    Devamını Gör
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {# AÇIKLAMA ALANI SONU #}
-
       </div>
-    </div>
+    </div> {# col-lg-8 sonu #}
 
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content bg-dark">
-          <div class="modal-header border-0">
-            <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
-              aria-label="Kapat"></button>
-          </div>
-          <div class="modal-body d-flex align-items-center justify-content-center p-0">
-            <div id="modalCarousel" class="carousel slide w-100" data-bs-interval="false">
-              <div class="carousel-inner">
-                {% for image in node.field_arac_galeri %}
-                <div class="carousel-item {% if loop.first %}active{% endif %}">
-                  <img src="{{ file_url(image.entity.uri.value) }}" class="d-block mx-auto img-fluid"
-                    style="max-height: 90vh;">
-                </div>
-                {% endfor %}
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
+      <script>
       document.addEventListener('DOMContentLoaded', function () {
         const mainImages = document.querySelectorAll('#carGallery img');
         const modalItems = document.querySelectorAll('#modalCarousel .carousel-item');
@@ -248,35 +161,54 @@
       });
     </script>
 
-
-    <div class="col-md-4 d-flex align-items-start justify-content-end">
-      <div class="card arac-kart mb-4"> {# mb-4 ekledik alttaki kart ile boşluk bırakmak için #}
+    <div class="col-lg-4 col-md-12 d-flex align-items-start flex-column"> {# İlan Özellikleri kartı, col-lg-4 olarak
+      ayarlandı #}
+      <div class="card arac-kart mb-4 w-100">
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between">
             <div class="w-50"><strong>İlan No</strong></div>
             <div class="w-50 text-end">{{ random(100000000, 999999999) }}</div>
           </li>
+
           <li class="list-group-item d-flex justify-content-between">
-            <div class="w-50"><strong>Marka</strong></div>
-            <div class="w-50 text-end">{{ content.field_marka }}</div>
+            <div class="w-50"><strong>İlan Tarihi</strong></div>
+            <div class="w-50 text-end">
+              {{ node.created.value|date('d.m.Y') }}
+            </div>
           </li>
+
+          {# MARKA VE MODEL BİLGİSİ YENİDEN DÜZENLENDİ #}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="w-50"><strong>Marka</strong></div> {# Etiket tekrar "Marka" olarak ayarlandı #}
+            <div class="w-50 text-end">
+              {% if content.field_marka is not empty %}
+              {{ content.field_marka }}
+              {% endif %}
+              {# Eğer model alanı doluysa, alt satıra geçip modeli yazdır #}
+              {% if content.field_model is not empty %}
+              <br>
+              {{ content.field_model }}
+              {% endif %}
+              {# Eğer hem marka hem de model boşsa, "Belirtilmedi" yaz #}
+              {% if content.field_marka is empty and content.field_model is empty %}
+              Belirtilmedi
+              {% endif %}
+            </div>
+          </li>
+          {# MARKA VE MODEL BİLGİSİ SONU #}
+
           <li class="list-group-item d-flex justify-content-between">
             <div class="w-50"><strong>Fiyat</strong></div>
             <div class="w-50 text-end">{{ content.field_fiyat }}</div>
           </li>
-
           <li class="list-group-item d-flex justify-content-between">
-            <div class="w-50"><strong>Marka</strong></div>
+            <div class="w-50"><strong>Konum</strong></div>
             <div class="w-50 text-end">
-              {% set marka = content.field_marka|render|striptags|trim %}
-              {{ marka ?: 'Belirtilmedi' }}
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <div class="w-50"><strong>Model</strong></div>
-            <div class="w-50 text-end">
-              {% set model = content.field_model|render|striptags|trim %}
-              {{ model ?: 'Belirtilmedi' }}
+              {% if content.field_konum is not empty %}
+              {{ content.field_konum }}
+              {% else %}
+              Belirtilmedi
+              {% endif %}
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between">
@@ -289,7 +221,13 @@
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <div class="w-50"><strong>Vites</strong></div>
-            <div class="w-50 text-end">{{ content.field_vites}}</div>
+            <div class="w-50 text-end">
+              {% if content.field_vites is not empty %}
+              {{ content.field_vites_tipi}}
+              {% else %}
+              Belirtilmedi
+              {% endif %}
+            </div>
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <div class="w-50"><strong>Araç Durumu</strong></div>
@@ -327,48 +265,121 @@
           </li>
         </ul>
       </div>
+    </div> {# col-lg-4 sonu #}
+  </div> {# row sonu - fotoğraf ve ilan bilgileri #}
 
-      {# Yeni Eklenecek Bölüm: İlan Veren Kullanıcı Bilgileri #}
-      {% if node.field_ilan_veren and not node.field_ilan_veren.empty %}
-        {% set ilan_veren_entity = node.field_ilan_veren.entity %}
-        <div class="card ilan-veren-kart">
-          <div class="card-header">
-            <strong>İlan Veren Bilgileri</strong>
+  <div class="row mt-4"> {# YENİ SATIR: AÇIKLAMA VE İLAN VEREN BİLGİLERİ İÇİN #}
+    <div class="col-lg-8 col-md-12"> {# Açıklama alanı, col-lg-8 olarak ayarlandı #}
+      <div class="p-4 bg-light rounded border">
+        <h5 class="mb-3">İlan Açıklaması</h5>
+        <div class="aciklama-wrapper">
+          <div class="aciklama-icerik fs-5" id="fullAciklamaContent">
+            {{ content.field_aciklama }}
           </div>
-          <ul class="list-group list-group-flush">
-            {% if ilan_veren_entity.field_adi and not ilan_veren_entity.field_adi.empty %}
-            <li class="list-group-item d-flex justify-content-between">
-              <div class="w-50"><strong>Adı Soyadı</strong></div>
-              <div class="w-50 text-end">
-                {{ ilan_veren_entity.field_adi.value }} {{ ilan_veren_entity.field_soyadi.value }}
-              </div>
-            </li>
-            {% endif %}
-
-            {% if ilan_veren_entity.field_e_posta_adresi and not ilan_veren_entity.field_e_posta_adresi.empty %}
-            <li class="list-group-item d-flex justify-content-between">
-              <div class="w-50"><strong>E-Posta</strong></div>
-              <div class="w-50 text-end">
-                <a href="mailto:{{ ilan_veren_entity.field_e_posta_adresi.value }}">{{ ilan_veren_entity.field_e_posta_adresi.value }}</a>
-              </div>
-            </li>
-            {% endif %}
-
-            {% if ilan_veren_entity.field_telefon_numarasi and not ilan_veren_entity.field_telefon_numarasi.empty %}
-            <li class="list-group-item d-flex justify-content-between">
-              <div class="w-50"><strong>Telefon</strong></div>
-              <div class="w-50 text-end d-flex align-items-center justify-content-end">
-                <span>{{ ilan_veren_entity.field_telefon_numarasi.value }}</span>
-                <a href="tel:{{ ilan_veren_entity.field_telefon_numarasi.value }}" class="btn btn-primary btn-sm ms-2">
-                  <i class="bi bi-telephone"></i> Ara
-                </a>
-              </div>
-            </li>
-            {% endif %}
-          </ul>
+          <div id="aciklamaToggleWrapper" class="aciklama-devamini-gor-wrapper" style="display: none;">
+            <button class="btn btn-link aciklama-devamini-gor-btn" type="button" id="toggleAciklamaBtn">
+              Devamını Gör
+            </button>
+          </div>
         </div>
+      </div>
+    </div> {# col-lg-8 sonu - açıklama #}
+
+    <div class="col-lg-4 col-md-12 d-flex align-items-start flex-column"> {# İlan Veren ve İletişim Formu, col-lg-4
+      olarak ayarlandı #}
+      {# İlan Veren Kullanıcı Bilgileri #}
+      {% if node.field_ilan_veren and not node.field_ilan_veren.empty %}
+      {% set ilan_veren_entity = node.field_ilan_veren.entity %}
+      <div class="card ilan-veren-kart w-100 mb-4">
+        <div class="card-header">
+          <strong>İlan Veren Bilgileri</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% if ilan_veren_entity.field_adi and not ilan_veren_entity.field_adi.empty %}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="w-50"><strong>Adı Soyadı</strong></div>
+            <div class="w-50 text-end">
+              {{ ilan_veren_entity.field_adi.value }} {{ ilan_veren_entity.field_soyadi.value }}
+            </div>
+          </li>
+          {% endif %}
+
+          {% if ilan_veren_entity.field_e_posta_adresi and not ilan_veren_entity.field_e_posta_adresi.empty %}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="w-50"><strong>E-Posta</strong></div>
+            <div class="w-50 text-end">
+              <a href="mailto:{{ ilan_veren_entity.field_e_posta_adresi.value }}">{{
+                ilan_veren_entity.field_e_posta_adresi.value }}</a>
+            </div>
+          </li>
+          {% endif %}
+
+          {% if ilan_veren_entity.field_telefon_numarasi and not ilan_veren_entity.field_telefon_numarasi.empty %}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="w-50"><strong>Telefon</strong></div>
+            <div class="w-50 text-end d-flex align-items-center justify-content-end">
+              <span>{{ ilan_veren_entity.field_telefon_numarasi.value }}</span>
+              <a href="tel:{{ ilan_veren_entity.field_telefon_numarasi.value }}" class="btn btn-primary btn-sm ms-2">
+                <i class="bi bi-telephone"></i> Ara
+              </a>
+            </div>
+          </li>
+          {% endif %}
+
+          {# KONUM ALANI - İlan veren kişisinin konumu #}
+          {% if ilan_veren_entity.field_kullanici_konum and not ilan_veren_entity.field_kullanici_konum.empty %}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="w-50"><strong>Konum</strong></div>
+            <div class="w-50 text-end d-flex align-items-center justify-content-end">
+              {% set konum_values = [] %}
+              {% for item in ilan_veren_entity.field_kullanici_konum %}
+              {% if item.entity is defined and item.entity.label is defined %}
+              {% set konum_values = konum_values|merge([item.entity.label]) %}
+              {% elseif item.value is defined %}
+              {% set konum_values = konum_values|merge([item.value]) %}
+              {% endif %}
+              {% endfor %}
+              <span>{{ konum_values|join(', ') }}</span>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
       {% endif %}
 
-    </div>
-  </div>
-</div>
+      {# Modal hala en dış div içinde kalmalı #}
+      <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+              <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
+                aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center p-0">
+              <div id="modalCarousel" class="carousel slide w-100" data-bs-interval="false">
+                <div class="carousel-inner">
+                  {% for image in node.field_arac_galeri %}
+                  <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <img src="{{ file_url(image.entity.uri.value) }}" class="d-block mx-auto img-fluid"
+                      style="max-height: 90vh;">
+                  </div>
+                  {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> {# arac-detay container sonu #}
+
+
+    

@@ -1,66 +1,62 @@
-/* Footer Genel Stiller */
+/* Genel Footer Stilleri */
 .main-footer-section {
-    background-color: white; /* Beyaz arka plan */
-    padding: 60px 0 20px 0; /* Üstten ve alttan boşluk */
-    font-size: 15px;
+    margin-top: 200px;
+    background-color: #f7f7f7; /* sahibinden.com'a yakın açık gri arka plan */
     color: #333;
+    font-family: Arial, sans-serif; /* sahibinden.com'un genel fontu */
+    font-size: 13px; /* Genel font boyutu */
+    line-height: 1.6;
+}
+
+.footer-upper-section {
+    padding: 30px 0; /* Üst section boşluğu */
+    border-bottom: 1px solid #eee; /* İnce ayırıcı çizgi */
 }
 
 .footer-content-wrapper {
-    max-width: 1200px; /* İçeriğin maksimum genişliği */
-    margin: 0 auto; /* Yatayda ortala */
-    padding: 0 20px; /* Yanlardan boşluk */
-    display: flex; /* Öğeleri yan yana diz */
-    justify-content: space-between; /* Öğeleri aralarında boşluk bırakarak yay */
-    align-items: flex-start; /* Öğeleri yukarıdan hizala */
-    flex-wrap: wrap; /* Küçük ekranlarda alt satıra geçmelerine izin ver */
-    gap: 30px; /* Öğeler arası boşluk */
-}
-
-/* Footer Logo Alanı */
-.footer-logo-area {
-    flex-shrink: 0; /* Küçülmesini engelle */
-    margin-right: 40px; /* Sağında boşluk */
-}
-
-.footer-logo {
-    height: 36px; /* Logo yüksekliği */
-    display: block;
-}
-
-/* Menü Sütunları */
-.footer-nav-columns {
-    display: flex; /* Sütunları yan yana diz */
+    display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 50px; /* Sütunlar arası boşluk */
-    margin-right: auto; /* Soldaki alanı kapla, sağdaki sosyal medya kısmına itme */
+    gap: 20px; /* Sütunlar arası varsayılan boşluk */
+    max-width: 1200px; /* sahibinden.com gibi geniş bir alan */
+    margin: 0 auto;
+    padding: 0 15px; /* Yanlardan boşluk */
+}
+
+/* Sütunlar */
+.footer-column-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1; /* Alana yayılsınlar */
+    gap: 30px; /* Sütunlar arası boşluk */
 }
 
 .footer-nav-column {
-    flex-shrink: 0;
+    flex: 1 1 auto; /* Esnek genişlik, içeriğe göre küçülüp büyüyebilir */
+    min-width: 120px; /* Sütunların minimum genişliği */
 }
 
 .footer-column-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-    white-space: nowrap; /* Başlığın tek satırda kalmasını sağla */
+    color: #555;
+    margin-bottom: 15px;
+    white-space: nowrap;
 }
 
 .footer-list {
-    list-style: none; /* Liste işaretlerini kaldır */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .footer-list li {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .footer-list a {
     text-decoration: none;
-    color: #555;
+    color: #666;
     transition: color 0.2s ease-in-out;
 }
 
@@ -68,148 +64,222 @@
     color: #007bff; /* Mavi tonu */
 }
 
-/* Sosyal Medya ve İletişim */
-.footer-social-contact {
+/* Sosyal Medya İkonları Listesi */
+.footer-list.social-icons-list li {
     display: flex;
-    flex-direction: column; /* Dikeyde sırala */
-    align-items: flex-end; /* Sağa hizala */
-    flex-shrink: 0; /* Küçülmesini engelle */
-    white-space: nowrap; /* Metinlerin tek satırda kalmasını sağla */
+    align-items: center;
+    margin-bottom: 5px;
 }
 
-.social-icons {
-    display: flex; /* İkonları yan yana diz */
-    gap: 15px; /* İkonlar arası boşluk */
-    margin-bottom: 20px;
-}
-
-.social-icon-link img {
-    width: 36px; /* İkon boyutu */
-    height: 36px; /* İkon boyutu */
-    border-radius: 50%; /* Yuvarlak ikonlar */
-    background-color: #e0e6ec; /* İkonların arka plan rengi */
-    padding: 8px; /* İç boşluk */
-    transition: background-color 0.2s ease-in-out;
-}
-
-.social-icon-link img:hover {
-    background-color: #d0d6dc;
-}
-
-.email-button {
-    background-color: #e0e6ec; /* Buton arka plan rengi */
-    color: #007bff; /* Metin rengi */
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 30px; /* Yuvarlak kenarlar */
-    font-weight: bold;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.email-button:hover {
-    background-color: #d0d6dc;
-}
-
-.social-icon-link i { /* img yerine i */
-    font-size: 20px; /* İkon boyutu */
-    color: #007bff; /* İkon rengi */
-    background-color: #e0e6ec; /* Arka plan rengi */
-    padding: 8px; /* İç boşluk */
-    border-radius: 50%; /* Yuvarlak ikonlar */
-    width: 36px; /* İkonların kapsayıcı genişliği */
-    height: 36px; /* İkonların kapsayıcı yüksekliği */
-    display: flex; /* İçindeki ikonu ortalamak için */
-    justify-content: center; /* Yatayda ortala */
-    align-items: center; /* Dikeyde ortala */
-    transition: background-color 0.2s ease-in-out;
-}
-
-.social-icon-link i:hover {
-    background-color: #d0d6dc;
-}
-
-/* En Alt Çubuk ve Telif Hakkı */
-.footer-bottom-bar {
-    border-top: 1px solid #eee; /* Üstte ince çizgi */
-    padding-top: 20px;
-    margin-top: 40px; /* Üstten boşluk */
-    text-align: center; /* Telif hakkı metnini ortala */
-    display: flex; /* İçeriği yan yana düzenlemek için */
-    flex-direction: column; /* Mobil görünümde dikeyde sırala */
-    align-items: center; /* Dikeyde ortala */
-    gap: 10px; /* İç öğeler arası boşluk */
-}
-
-.footer-region-content {
-    /* page.footer bölgesinden gelecek içerik için stiller */
+.footer-list.social-icons-list i {
+    font-size: 16px;
     color: #666;
+    margin-right: 8px;
+}
+
+.footer-list.social-icons-list a:hover i {
+    color: #007bff;
+}
+
+/* Orta Bölüm (Telefon, Yardım, Dil, İkonlar) */
+.footer-middle-section {
+    background-color: #eceff1; /* Orta bölümün hafif gri arka planı */
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.footer-middle-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-contact-info {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+}
+
+.phone-icon {
+    background-color: #dc3545; /* Kırmızı tonu */
+}
+
+.help-icon {
+    background-color: #ffc107; /* Sarı tonu */
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-size: 12px;
+    color: #777;
+}
+
+.contact-value {
     font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.contact-value:hover {
+    color: #007bff;
+}
+
+.footer-language-select .form-select {
+    width: 200px; /* Genişliği ayarla */
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.footer-right-icons .sahibinden-app-icon {
+    height: 40px; /* sahibinden.com logosu veya uygulama ikonu */
+    display: block;
+}
+
+/* Alt Bölüm (Yasal Metin, Telif Hakkı, QR Kod) */
+.footer-bottom-bar {
+    padding: 20px 15px 30px 15px; /* Üst, sağ, alt, sol boşluk */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Alt kısımdan hizala */
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-bottom-left {
+    flex-grow: 1;
+    margin-right: 20px; /* Sağında boşluk bırak */
+    max-width: 70%; /* Geniş metin alanı için */
+}
+
+.legal-text {
+    font-size: 11px; /* Küçük font boyutu */
+    color: #777;
+    margin-bottom: 10px;
 }
 
 .copyright-text {
-    margin: 0; /* Varsayılan paragraf boşluğunu kaldır */
-    color: #666;
-    font-size: 14px;
+    font-size: 12px;
+    color: #555;
+    margin: 0;
 }
 
+.footer-bottom-right {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.qr-code-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.qr-code-img {
+    width: 80px; /* QR kod boyutu */
+    height: 80px;
+    border: 1px solid #ddd; /* Hafif kenarlık */
+    padding: 3px;
+    background-color: #fff;
+}
+
+.qr-code-text {
+    font-size: 12px;
+    color: #555;
+    margin: 0;
+    white-space: nowrap;
+}
 
 /* Responsive Ayarlamalar */
 @media (max-width: 992px) { /* Tabletler ve daha küçük */
     .footer-content-wrapper {
-        flex-direction: column; /* Öğeleri dikeyde sırala */
-        align-items: center; /* Yatayda ortala */
+        flex-direction: column; /* Menü sütunları dikeyde sıralansın */
+        align-items: center;
         text-align: center;
     }
 
-    .footer-logo-area {
-        margin-right: 0;
-        margin-bottom: 30px;
-    }
-
-    .footer-nav-columns {
+    .footer-column-group {
         width: 100%;
-        justify-content: space-around; /* Sütunları daha eşit yay */
-        margin-right: 0;
-        margin-bottom: 30px;
+        justify-content: center; /* Sütun gruplarını ortala */
+        gap: 20px;
     }
 
     .footer-nav-column {
-        flex: 1 1 auto; /* Esnek genişlik */
+        min-width: unset; /* Minimum genişliği kaldır */
+        flex: unset; /* Esnekliği kaldır */
+        width: 45%; /* Yan yana iki sütun için */
+        margin-bottom: 20px;
+    }
+    
+    .footer-follow-us { /* "Bizi Takip Edin" sütunu */
+        width: 100%; /* Tam genişlik kaplasın */
+        margin-top: 20px;
     }
 
-    .footer-social-contact {
-        align-items: center; /* Sosyal medya kısmını ortala */
-        margin-bottom: 30px;
+    .footer-middle-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-contact-info {
+        justify-content: center;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-bottom-left {
+        margin-right: 0;
+        max-width: 100%; /* Tam genişlik */
     }
 }
 
 @media (max-width: 768px) { /* Küçük tabletler ve telefonlar */
-    .footer-nav-columns {
-        flex-direction: column; /* Menü sütunlarını dikeyde sırala */
-        gap: 20px;
-    }
     .footer-nav-column {
-        margin-bottom: 20px;
+        width: 80%; /* Tek sütun halinde daha geniş */
+        max-width: 300px; /* Belirli bir max genişlik */
     }
 }
 
 @media (max-width: 576px) { /* Çok küçük ekranlar */
-    .footer-content-wrapper {
-        padding: 0 15px;
-    }
-
-    .social-icons {
-        gap: 10px;
-    }
-
-    .social-icon-link img {
-        width: 32px;
-        height: 32px;
-        padding: 6px;
-    }
-
-    .email-button {
-        padding: 10px 20px;
-        font-size: 14px;
+    .footer-nav-column {
+        width: 100%; /* Tam genişlik */
     }
 }

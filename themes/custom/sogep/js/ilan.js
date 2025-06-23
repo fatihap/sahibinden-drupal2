@@ -1,65 +1,79 @@
-  document.addEventListener('DOMContentLoaded', function () {
-    // ... (Mevcut galeri ve favori butonu kodlarınız) ...
+/**
+ * @file
+ * ilan.js
+ *
+ * Provides functionality for image gallery, favorite button, and description toggle on ilan nodes.
+ */
 
-    // YENİ Eklenecek: Açıklama Devamını Gör/Gizle JS (Daha Güvenilir Yaklaşım)
-    const fullAciklamaContent = document.getElementById('fullAciklamaContent');
-    const toggleAciklamaBtn = document.getElementById('toggleAciklamaBtn');
-    const aciklamaToggleWrapper = document.getElementById('aciklamaToggleWrapper');
-    const defaultCollapsedHeight = 150; // CSS'deki .aciklama-icerik.collapsed max-height ile uyumlu olmalı
-
-    console.log("DOMContentLoaded: fullAciklamaContent", fullAciklamaContent);
-    console.log("DOMContentLoaded: toggleAciklamaBtn", toggleAciklamaBtn);
-    console.log("DOMContentLoaded: aciklamaToggleWrapper", aciklamaToggleWrapper);
-
-    // Sayfa yüklendiğinde (veya DOM hazır olduğunda), açıklamanın gerçek yüksekliğini kontrol et
-    // ve eğer yüksekse kısaltma sınıfını ekle.
-    setTimeout(() => {
-      if (!fullAciklamaContent) {
-        console.error("Hata: fullAciklamaContent bulunamadı.");
-        return; // Element yoksa daha fazla devam etme
-      }
-      
-      const actualContentHeight = fullAciklamaContent.scrollHeight;
-      console.log("setTimeout Çalıştı: actualContentHeight =", actualContentHeight);
-      console.log("defaultCollapsedHeight =", defaultCollapsedHeight);
-
-      if (actualContentHeight > defaultCollapsedHeight) {
-        console.log("Açıklama uzun, kısaltılıyor...");
-        fullAciklamaContent.classList.add('collapsed'); // Başlangıçta kısaltılmış hali
-        if (aciklamaToggleWrapper) {
-          aciklamaToggleWrapper.style.display = 'block'; // Butonu göster
-          console.log("Buton gösterildi.");
-        } else {
-            console.error("Hata: aciklamaToggleWrapper bulunamadı.");
-        }
-      } else {
-        console.log("Açıklama kısa, buton gizleniyor.");
-        if (aciklamaToggleWrapper) {
-          aciklamaToggleWrapper.style.display = 'none'; // Butonu gizle
-        }
-        fullAciklamaContent.classList.add('expanded'); // Kısa ise direkt expanded olarak bırak
-      }
-    }, 500); // Gecikmeyi artırdım, 500ms (0.5 saniye) olabilir. Gerekirse daha da artırın.
-
-    // Buton tıklama olayı sadece buton varsa eklensin
-    if (toggleAciklamaBtn) {
-      toggleAciklamaBtn.addEventListener('click', function() {
-          console.log("Butona tıklandı.");
-          if (fullAciklamaContent.classList.contains('collapsed')) {
-              // Kısaltılmış durumdayken tıklandı, genişlet
-              fullAciklamaContent.classList.remove('collapsed');
-              fullAciklamaContent.classList.add('expanded');
-              toggleAciklamaBtn.textContent = 'Daha Az Göster';
-              console.log("Açıklama genişletildi.");
-          } else {
-              // Genişletilmiş durumdayken tıklandı, kısalt
-              fullAciklamaContent.classList.remove('expanded');
-              fullAciklamaContent.classList.add('collapsed');
-              toggleAciklamaBtn.textContent = 'Devamını Gör';
-              console.log("Açıklama daraltıldı.");
-          }
+(function ($, Drupal) {
+  Drupal.behaviors.ilanNodeScripts = {
+    attach: function (context, settings) {
+      // --- Galeri İşlevselliği ---
+      // ... (Mevcut galerİ kodlarınız) ...
+      $('#carGallery img', context).once('gallery-img-click').each(function () {
+        $(this).on('click', function () {
+          const index = $(this).data('image-index');
+          $('#modalCarousel .carousel-item', context).removeClass('active');
+          $($('#modalCarousel .carousel-item', context)[index]).addClass('active');
+        });
       });
-    } else {
-        console.error("Hata: toggleAciklamaBtn bulunamadı. Buton dinleyicisi eklenemedi.");
+
+      // --- Favori Butonu İşlevselliği ---
+      $('#favButton', context).once('fav-button-click').each(function () {
+        const $favButton = $(this);
+        const $favIcon = $('#favIcon', context);
+        const $favToastElement = $('#favToast .toast', context);
+        // bootstrap.Toast doğrudan erişim sağlamak yerine jQuery nesnesinin ilk elemanını kullanın
+        const favToast = new bootstrap.Toast($favToastElement[0]);
+        const $favToastText = $('#favToastText', context);
+        const ilanBaslik = $('#ilanBaslik', context).text().trim();
+
+        let isFavorited = false;
+
+        $favButton.on('click', function () {
+          isFavorited = !isFavorited;
+
+          if (isFavorited) {
+            $favIcon.removeClass("bi-star").addClass("bi-star-fill");
+            $favToastText.text(`"${ilanBaslik}" favorilere eklendi`);
+          } else {
+            $favIcon.removeClass("bi-star-fill").addClass("bi-star");
+            $favToastText.text(`"${ilanBaslik}" favorilerden çıkarıldı`);
+          }
+          favToast.show();
+        });
+      });
+
+
+      // --- Açıklama Devamını Gör/Gizle İşlevselliği ---
+      $('#fullAciklamaContent', context).once('description-toggle').each(function () {
+        const $fullAciklamaContent = $(this);
+        const $toggleAciklamaBtn = $('#toggleAciklamaBtn', context);
+        const $aciklamaToggleWrapper = $('#aciklamaToggleWrapper', context);
+        const defaultCollapsedHeight = 150;
+
+        if ($fullAciklamaContent.length && $toggleAciklamaBtn.length && $aciklamaToggleWrapper.length) {
+          const actualContentHeight = $fullAciklamaContent[0].scrollHeight;
+
+          if (actualContentHeight > defaultCollapsedHeight) {
+            $fullAciklamaContent.addClass('collapsed');
+            $aciklamaToggleWrapper.css('display', 'block');
+          } else {
+            $aciklamaToggleWrapper.css('display', 'none');
+            $fullAciklamaContent.addClass('expanded');
+          }
+
+          $toggleAciklamaBtn.on('click', function () {
+            if ($fullAciklamaContent.hasClass('collapsed')) {
+              $fullAciklamaContent.removeClass('collapsed').addClass('expanded');
+              $(this).text('Daha Az Göster');
+            } else {
+              $fullAciklamaContent.removeClass('expanded').addClass('collapsed');
+              $(this).text('Devamını Gör');
+            }
+          });
+        }
+      });
     }
-  });
+  };
+})(jQuery, Drupal);

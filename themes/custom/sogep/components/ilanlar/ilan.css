@@ -40,3 +40,57 @@
   font-size: 1rem;
   /* Daha görünür olması için küçük bir stil */
 }
+/* ilan.css dosyanıza eklenecekler */
+
+.ilan-baslik-wrapper {
+  background-color: #e8e4c7; /* Açık gri bir arka plan */
+  padding: 20px 30px; /* İç boşluklar */
+  margin-bottom: 25px; /* Alt boşluk */
+  border-radius: 8px; /* Köşeleri yumuşatma */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+  display: flex; /* İçerideki öğeleri hizalamak için flexbox */
+  align-items: center; /* Dikeyde ortalama */
+  justify-content: space-between; /* Başlık ve buton arasına boşluk bırakma */
+}
+
+.ilan-baslik-wrapper h1 {
+  margin: 0; /* h1'in varsayılan margin'lerini sıfırla */
+  color: #343a40; /* Koyu gri yazı rengi */
+  font-size: 2.2rem; /* Başlık boyutu */
+  font-weight: 700; /* Kalın yazı tipi */
+  text-transform: uppercase; /* Zaten Twig'de büyük harfe çevriliyor ama burada da emin olalım */
+  letter-spacing: 1.5px; /* Harfler arasında boşluk */
+  flex-grow: 1; /* Başlığın mevcut alanı doldurmasını sağla */
+  word-break: break-word; /* Uzun başlıklarda kelimeleri kırma */
+}
+
+/* Favori butonu için ek stil (isteğe bağlı) */
+#favButton {
+  margin-left: 20px; /* Başlıktan biraz uzaklaştır */
+  transition: transform 0.2s ease-in-out; /* Hover efekti için geçiş */
+}
+
+#favButton:hover {
+  transform: scale(1.1); /* Üzerine gelindiğinde hafif büyüme */
+}
+
+#favIcon {
+  color: #ffc107 !important; /* Sarı renk (Bootstrap warning rengi) */
+}
+
+/* Küçük ekranlar için responsive ayarlar */
+@media (max-width: 768px) {
+  .ilan-baslik-wrapper {
+    flex-direction: column; /* Başlık ve butonu dikeyde sırala */
+    align-items: flex-start; /* Sola hizala */
+    padding: 15px 20px;
+  }
+  .ilan-baslik-wrapper h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px; /* Butonla arasına boşluk bırak */
+  }
+  #favButton {
+    margin-left: 0;
+    margin-top: 10px; /* Başlıktan aşağıya al */
+  }
+}

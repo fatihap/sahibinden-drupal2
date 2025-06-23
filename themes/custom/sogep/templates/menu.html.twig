@@ -34,7 +34,7 @@
         <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="site-branding__logo" />
       {% else %}
         {# Eğer yönetim panelinde logo yoksa, temanın kendi içindeki varsayılan logo.png #}
-        <img src="{{ base_path ~ directory }}/logo.png" alt="{{ 'Home'|t }}" class="site-branding__logo" />
+        <img src="{{ base_path ~ directory }}/images/logo.png" alt="{{ 'Home'|t }}" class="site-branding__logo" />
       {% endif %}
     </a>
 
@@ -43,7 +43,7 @@
       <div class="search-bar-wrapper">
         <input
           type="text"
-          placeholder="Kelime, ilan no veya mağaza adı ile ara"
+          placeholder="Araç Ara"
           class="search-input"
         />
         <button class="search-button">
@@ -52,7 +52,6 @@
           </svg>
         </button>
       </div>
-      <a href="#" class="detailed-search-link">Detaylı Arama</a>
     </div>
 
     {# Sağ Bölüm: Kayıt Ol, İlanlar Sayfası ve Ücretsiz İlan Ver Butonu #}

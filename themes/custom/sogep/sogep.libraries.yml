@@ -1,3 +1,4 @@
+
 basic:
   css:
     theme:
@@ -13,27 +14,36 @@ menu:
     theme:
       css/menu.css: {}
   js:
-    js/menu.js: {} 
+    js/menu.js: {}
   dependencies:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/bootstrap.collapse # Eğer Bootstrap collapse kullanıyorsanız
-    - core/bootstrap.toast # Toast için
-    - core/bootstrap.carousel # Carousel için
+    - core/bootstrap.collapse
+    - core/bootstrap.toast
+    - core/bootstrap.carousel
 
 footer:
   css:
     theme:
       css/footer.css: {}
-ilanlar:
+
+ilanlar: 
   css:
     theme:
       components/ilanlar/ilanlar.css: {}
-ilan:
+
+ilan: 
   css:
     theme:
       https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css: { type: external }
       components/ilanlar/ilan.css: {}
   js:
-    js/ilan_script.js:    
+    js/ilan.js: {} 
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/bootstrap.collapse 
+    - core/bootstrap.toast
+    - core/bootstrap.carousel

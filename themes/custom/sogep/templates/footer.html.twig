@@ -3,68 +3,133 @@
  * @file
  * Custom footer template for Sogep theme.
  *
- * This template renders the footer section based on the provided design.
+ * This template renders the footer section based on the sahibinden.com design.
  */
 #}
 
 <footer class="main-footer-section">
-  <div class="footer-content-wrapper">
-    <div class="footer-logo-area">
-      {# Tema klasöründeki logo.png dosyasını doğrudan kullan #}
-      <a href="{{ path('<front>') }}" rel="home">
-        <img src="{{ base_path ~ directory }}/logo.png" alt="{{ 'Home'|t }}" class="footer-logo" />
-      </a>
+  <div class="footer-upper-section">
+    <div class="footer-content-wrapper container"> {# Bootstrap'ın container sınıfını ekledik #}
+
+      {# Sütunlu Menü Alanları #}
+      <div class="footer-column-group">
+        {# Kurumsal #}
+        <div class="footer-nav-column">
+          <h4 class="footer-column-title">Kurumsal</h4>
+          <ul class="footer-list">
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">Sürdürülebilirlik</a></li>
+            <li><a href="#">İnsan Kaynakları</a></li>
+            <li><a href="#">Haberler</a></li>
+            <li><a href="#">Site Haritası</a></li>
+            <li><a href="#">Bayi Girişi</a></li>
+          </ul>
+        </div>
+
+        {# Hizmetlerimiz #}
+        <div class="footer-nav-column">
+          <h4 class="footer-column-title">Hizmetlerimiz</h4>
+          <ul class="footer-list">
+            <li><a href="#">Doping</a></li>
+            <li><a href="#">S - Param Güvende</a></li>
+            <li><a href="#">Güvenli E-Ticaret (GET)</a></li>
+            <li><a href="#">Toplu Ürün Girişi</a></li>
+            <li><a href="#">Reklam</a></li>
+            <li><a href="#">Mobil</a></li>
+            <li><a href="#">Auto King</a></li>
+          </ul>
+        </div>
+
+        {# Mağazalar #}
+        <div class="footer-nav-column">
+          <h4 class="footer-column-title">Mağazalar</h4>
+          <ul class="footer-list">
+            <li><a href="#">Neden Mağaza?</a></li>
+            <li><a href="#">Mağaza Açmak İstiyorum</a></li>
+          </ul>
+        </div>
+
+        {# Gizlilik ve Kullanım #}
+        <div class="footer-nav-column">
+          <h4 class="footer-column-title">Gizlilik ve Kullanım</h4>
+          <ul class="footer-list">
+            <li><a href="#">Güvenli Alışveriş İpuçları</a></li>
+            <li><a href="#">Sözleşmeler ve Kurallar</a></li>
+            <li><a href="#">Hesap Kapatma</a></li>
+            <li><a href="#">Kullanım Koşulları</a></li>
+            <li><a href="#">Kişisel Verilerin Korunması</a></li>
+            <li><a href="#">Çerez Yönetimi</a></li>
+            <li><a href="#">Yardım ve İşlem Rehberi</a></li>
+          </ul>
+        </div>
+
+        {# Bizi Takip Edin #}
+        <div class="footer-nav-column footer-follow-us">
+          <h4 class="footer-column-title">Bizi Takip Edin</h4>
+          <ul class="footer-list social-icons-list">
+            <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="bi bi-twitter-x"></i> X</a></li> {# Twitter (X) ikonu #}
+            <li><a href="#"><i class="bi bi-linkedin"></i> Linkedin</a></li>
+            <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="bi bi-youtube"></i> Youtube</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div> {# .footer-upper-section sonu #}
 
-    {# Menü Sütunları - Bu alanları Drupal menülerinden doldurabiliriz #}
-    <div class="footer-nav-columns">
-      {# Hakkında menüsü #}
-      <div class="footer-nav-column">
-        <h4 class="footer-column-title">Hakkında</h4>
-        <ul class="footer-list">
-          <li><a href="#">Nam urna nequ</a></li>
-          <li><a href="#">Nam urna nequ</a></li>
-          <li><a href="#">Nam urna nequ</a></li>
-        </ul>
+  <div class="footer-middle-section">
+    <div class="container footer-middle-content">
+      {# Sol Kısım: 7/24 Hizmet ve Yardım Merkezi #}
+      <div class="footer-contact-info">
+        <div class="contact-item">
+          <div class="contact-icon-circle phone-icon"><i class="bi bi-telephone-fill"></i></div>
+          <div class="contact-details">
+            <span class="contact-label">7/24 Müşteri Hizmetleri</span>
+            <a href="tel:08502224444" class="contact-value">0 850 222 44 44</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon-circle help-icon"><i class="bi bi-question-lg"></i></div>
+          <div class="contact-details">
+            <span class="contact-label">Yardım Merkezi</span>
+            <a href="mailto:yardim.sahibinden.com" class="contact-value">yardim.sahibinden.com</a>
+          </div>
+        </div>
       </div>
 
-      {# Fiyatlandırma menüsü #}
-      <div class="footer-nav-column">
-        <h4 class="footer-column-title">Fiyatlandırma</h4>
-        <ul class="footer-list">
-          <li><a href="#">Nam urna nequ</a></li>
-          <li><a href="#">Nam urna nequ</a></li>
-          <li><a href="#">Nam urna nequ</a></li>
-        </ul>
+      {# Orta Kısım: Dil Seçimi #}
+      <div class="footer-language-select">
+        <select class="form-select" aria-label="Dil Seçimi">
+          <option selected>TR Türkçe (Turkish)</option>
+          <option value="en">EN English</option>
+        </select>
       </div>
 
-      {# Teknoloji menüsü #}
-      <div class="footer-nav-column">
-        <h4 class="footer-column-title">Teknoloji</h4>
-        <ul class="footer-list">
-          <li><a href="#">Altyapı</a></li>
-          <li><a href="#">Ölçekleme</a></li>
-          <li><a href="#">Kullanıcı Yönetimi</a></li>
-        </ul>
+      {# Sağ Kısım: İkonlar ve QR Kod #}
+      <div class="footer-right-icons">
+        {# Buraya sahibinden.com'un sağ üstteki ikonu gibi görsel eklenebilir, şimdilik placeholder #}
+        <img src="{{ base_path ~ directory }}/images/sahibinden-icon.png" alt="Sahibinden Icon" class="sahibinden-app-icon" />
       </div>
     </div>
+  </div> {# .footer-middle-section sonu #}
 
-    {# Sosyal Medya ve İletişim #}
-    <div class="footer-social-contact">
-      <div class="social-icons">
-        <a href="#" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a> {# LinkedIn ikonu #}
-        <a href="#" class="social-icon-link"><i class="fab fa-instagram"></i></a> {# Instagram ikonu #}
-        <a href="#" class="social-icon-link"><i class="fab fa-medium-m"></i></a> {# Medium ikonu #}
-      </div>
-      <a href="mailto:info@eduport.io" class="email-button">info@eduport.io</a>
+  <div class="footer-bottom-bar container">
+    <div class="footer-bottom-left">
+      <p class="legal-text">
+        sahibinden.com'da yer alan kullanıcıların oluşturduğu tüm içerik, bilgi ve fotoğrafların doğruluğu,
+        içeriği ve bu içeriklerden doğabilecek zararlardan dolayı firmamız sorumlu tutulamaz.
+        sahibinden.com içeriği ve dizaynı telif hakkı ile korunmaktadır.
+        İnternet sitesi sözleşmesi, kullanıcı ve gizlilik politikası hükümlerini okuyunuz.
+      </p>
+      <p class="copyright-text">&copy; {{ "now"|date("Y") }} sahibinden.com</p>
     </div>
-  </div>
-
-  {# En Alt Telif Hakkı ve Footer Bölgesi #}
-  <div class="footer-bottom-bar">
-    {% if page.footer %}
-      <div class="footer-region-content">{{ page.footer }}</div>
-    {% endif %}
-    <p class="copyright-text"> &copy; {{ "now"|date("Y") }} Tüm Hakları Saklıdır.</p>
-  </div>
+    <div class="footer-bottom-right">
+      {# QR Kodu ve ek metin #}
+      <div class="qr-code-section">
+        <img src="{{ base_path ~ directory }}/images/qr-code.png" alt="QR Code" class="qr-code-img" />
+        <p class="qr-code-text">Uygulamayı İndir</p>
+      </div>
+    </div>
+  </div> {# .footer-bottom-bar sonu #}
 </footer>
